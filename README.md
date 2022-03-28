@@ -17,8 +17,7 @@
 1.	Public github or bitbucket repo with your commits
 2.	Readme.md file included in the repo shows the steps to setup EC2 and how to install
 your script.
-3.	Your application should be running on port 9090
-4.	**Extra** : Provide access to your testing AWS account with mentioning the EC2 name and
+3.	**Extra** : Provide access to your testing AWS account with mentioning the EC2 name and
     S3 bucket name.
 
 ***Bonus** seperate logs on the S3 bucket by EC2 instances to which they belong to easily identify which logs belong to which EC2.
