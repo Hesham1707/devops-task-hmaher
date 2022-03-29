@@ -14,13 +14,13 @@ cpu_usage () {
     idle=`top -b -n 1 | grep Cpu | awk '{print $8}'`
     usage=`echo 100 $idle | awk '{printf $1-$2}'`
     #write to file
-    echo "$(date +%c) --- Cpu usage $usage" >>  ~/logs/$file_name
+    echo "$(date +%c) --- Cpu usage $usage%" >>  ~/logs/$file_name
 }
 #Collect memory utilization
 memory_usage () {
-    total=`free -m | grep Mem | awk '{print $2}'` 
-    used=`free -m | grep Mem | awk '{print $3}'`
-    avail=`echo total-used | bc`
+    total=`free -m -h | grep Mem | awk '{print $2}'` 
+    used=`free -m -h | grep Mem | awk '{print $3}'`
+    avail=`echo $total-$used | awk '{print $1 - $2}'`
     util_precentage=`echo "$used $total" | awk '{printf "%f \n", $1 / $2}'`
 
     echo "$(date +%c) --- Available memory $total used memory $used available $avail utilization $util_precentage " >>  ~/logs/$file_name
@@ -32,7 +32,7 @@ disk_usage(){
     avail=`df -h | grep root | awk '{print $4}'`
     util_precentage=`df -h | grep root | awk '{print $5}'`
 
-    echo "$(date +%c) --- Disk size $total disk usage $used avaiable $avail utilization $util_precentage " >>  ~/logs/$file_name
+    echo "$(date +%c) --- Disk size $total disk usage $used available $avail utilization $util_precentage " >>  ~/logs/$file_name
     
 }
 
