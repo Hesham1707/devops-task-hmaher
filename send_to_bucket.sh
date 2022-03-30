@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #Get EC2 instaceid 
 instance_id=`curl -s http://169.254.169.254/latest/meta-data/instance-id`
 
@@ -8,4 +7,4 @@ date_today=$(date +%F)
 file_name=util_$date_today.log
 
 #send file to bucket under instanceId/todayDate
-aws s3 cp ~/logs/$file_name s3://test-hyasser-s3/$instance_id/$date_today/$file_name
+/usr/local/bin/aws s3 cp ~/logs/$file_name s3://test-hyasser-s3/$instance_id/$date_today/$file_name >> ~/awslogs.txt 2>&1
