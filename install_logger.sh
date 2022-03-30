@@ -19,7 +19,6 @@
 #Create scripts
 cat > collect_logs.sh <<'EOF'
 #!/bin/bash
-echo "starting logger"
 
 #Get current date to create log file for the day 
 date_today=$(date +%F)
@@ -65,7 +64,6 @@ chmod +x collect_logs.sh
 
 cat > send_to_bucket.sh <<'EOF1'
     #!/bin/bash
-    echo "starting upload"
     #Get EC2 instaceid 
     instance_id=`curl -s http://169.254.169.254/latest/meta-data/instance-id`
 
