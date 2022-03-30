@@ -88,5 +88,3 @@ crontab cron
 #delete cron file
 rm cron
 
-
-ls /usr/local/bin/awsa || sudo echo "not found"
