@@ -4,20 +4,21 @@
 
 
 #runs on ec2 initialization
-# sudo apt install unzip
+sudo apt install unzip
 
-# curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-# unzip awscliv2.zip
-# sudo ./aws/install
+ls ~/awscliv2.zip 2>/dev/null || curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+ls ~/aws 2>/dev/null || unzip awscliv2.zip
+ls /usr/local/bin/aws 2>/dev/null || sudo ./aws/install
 
-# mkdir -p ./aws
-
-# touch ~/.aws/config && printf "[default]\nregion = eu-west-2\noutput = json\n" >> config
-# touch ~/.aws/credentials && printf "[default]\naws_access_key_id = AKIA2SDEAZPKHJ4EJZHU\naws_secret_access_key = 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\n" >> credentials 
+mkdir -p ~/.aws
+ls ~/.aws/config 2>/dev/null ||  touch ~/.aws/config
+grep -qxF '[default]' ~/.aws/config || printf "[default]\nregion = eu-west-2\noutput = json\n" >> ~/.aws/config
+ls ~/.aws/credentials 2>/dev/null ||  touch ~/.aws/credentials
+grep -qxF '[default]' ~/.aws/credentials || printf "[default]\naws_access_key_id = AKIA2SDEAZPKHJ4EJZHU\naws_secret_access_key = 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\n" >> ~/.aws/credentials
 #End of initilization
 
 #Create scripts
-cat > collect_logs.sh <<'EOF'
+cat > ~/collect_logs.sh <<'EOF'
 #!/bin/bash
 
 #Get current date to create log file for the day 
@@ -60,9 +61,9 @@ cpu_usage
 memory_usage
 disk_usage
 EOF
-chmod +x collect_logs.sh 
+chmod +x ~/collect_logs.sh 
 
-cat > send_to_bucket.sh <<'EOF1'
+cat > ~/send_to_bucket.sh <<'EOF1'
     #!/bin/bash
     #Get EC2 instaceid 
     instance_id=`curl -s http://169.254.169.254/latest/meta-data/instance-id`
@@ -74,7 +75,7 @@ cat > send_to_bucket.sh <<'EOF1'
     #send file to bucket under instanceId/todayDate
     /usr/local/bin/aws s3 cp ~/logs/$file_name s3://test-hyasser-s3/$instance_id/$date_today/$file_name >> ~/awslogs.txt 2>&1
 EOF1
-chmod +x send_to_bucket.sh 
+chmod +x ~/send_to_bucket.sh 
 
 #Create crontabs 
 #write out current crontab
@@ -86,3 +87,6 @@ grep -qxF '0 0 * * * bash ~/send_to_bucket.sh' cron || sudo echo "0 0 * * * bash
 crontab cron
 #delete cron file
 rm cron
+
+
+ls /usr/local/bin/awsa || sudo echo "not found"
