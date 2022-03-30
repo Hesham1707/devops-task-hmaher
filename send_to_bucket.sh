@@ -1,4 +1,7 @@
 #!/bin/bash
+
+#!!! This script is auto-generated and any manual changes might get replaced
+
 #Get EC2 instaceid 
 instance_id=`curl -s http://169.254.169.254/latest/meta-data/instance-id`
 

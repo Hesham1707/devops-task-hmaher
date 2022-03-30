@@ -21,6 +21,8 @@ grep -qxF '[default]' ~/.aws/credentials || printf "[default]\naws_access_key_id
 cat > ~/collect_logs.sh <<'EOF'
 #!/bin/bash
 
+#!!! This script is auto-generated and any manual changes might get replaced
+
 #Get current date to create log file for the day 
 date_today=$(date +%F)
 file_name=util_$date_today.log
@@ -65,6 +67,9 @@ chmod +x ~/collect_logs.sh
 
 cat > ~/send_to_bucket.sh <<'EOF1'
     #!/bin/bash
+
+    #!!! This script is auto-generated and any manual changes might get replaced
+
     #Get EC2 instaceid 
     instance_id=`curl -s http://169.254.169.254/latest/meta-data/instance-id`
 

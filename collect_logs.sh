@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#!!! This script is auto-generated and any manual changes might get replaced
+
 #Get current date to create log file for the day 
 date_today=$(date +%F)
 file_name=util_$date_today.log
