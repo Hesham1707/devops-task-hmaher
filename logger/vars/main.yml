@@ -1,2 +1,3 @@
 ---
-# vars file for logger
+aws_region: eu-west-2
+aws_output: json

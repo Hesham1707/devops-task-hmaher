@@ -6,8 +6,8 @@
     name: unzip
     state: present
 - 
-  name: Create Tools directory if it does not exist
-  ansible.builtin.file:
+  name: Create Tools directory 
+  file:
     path: '~/Tools'
     state: directory
     mode: '0755'
@@ -17,20 +17,74 @@
     url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
     dest: '~/Tools/awscliv2.zip'
 
-- name: Unarchive the jdk tar file if it is not extracted
+- name: Unarchive the aws zip 
   unarchive:
     src: '~/Tools/awscliv2.zip'
     dest: '~/Tools/'
     remote_src: yes
     list_files: yes
+    keep_newer: yes
   register: unarchive_awscli
 
 # - debug:
-#     var: unarchive_res_java
+#     var: unarchive_awscli
 
-- name: cd into 
-  shell: install.sh 
+- name: install aws under Tools
+  shell: ./install
   args:
-    chdir: ~/Tools/"{{unarchive_awscli.files[0].split("/")[0]}}"/
+    chdir: '~/Tools/{{unarchive_awscli.files[0].split("/")[0]}}/'
+    creates: /usr/local/bin/aws
+
+- name: Include all
+  include_vars:
+    dir: vars
+
+- name: configure AWS
+  shell: aws configure set {{ item.key }} {{ item.value }} 
+  with_dict:
+    region: "{{ aws_region }}"
+    format: "{{ aws_output }}"
+    aws_access_key_id: "{{ aws_access_key }}"
+    aws_secret_access_key: "{{ aws_secret_key }}"
+  no_log: true
+  tags: configure-aws
+  # changed_when: false
 
 
+  #Send install_logger to machine
+
+- name: send script to target server
+  copy:
+    src: ../../install_logger.sh
+    dest: ~/Tools/install_logger.sh
+    mode: '0555'
+  tags: install-script
+
+
+- name: install logger under Tools
+  shell: ./install_logger.sh
+  args:
+    chdir: '~/Tools/'
+    creates: "{{item}}"
+  with_items:
+    -  ~/Tools/send_to_bucket.sh
+    -  ~/Tools/collect_logs.sh
+  tags: install-script
+
+- name: Collect logs every minute
+  cron:
+    name: "collect logs"
+    minute: "*"
+    hour: "*"
+    job: "bash ~/Tools/collect_logs.sh"
+    state: present
+  tags: cron
+
+- name: send logs to bucket everyday at 12am
+  cron:
+    name: "send logs"
+    minute: "0"
+    hour: "0"
+    job: "bash ~/Tools/send_to_bucket.sh"
+    state: present
+  tags: cron
