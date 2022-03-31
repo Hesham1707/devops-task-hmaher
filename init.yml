@@ -1,0 +1,8 @@
+---
+ -  
+    hosts: ec2_target
+    name: 'install and configure prequisites to run the logger'
+    roles:
+        - logger
+        #- {stack, db_name: mydb, db_user_name: user, db_user_password: pass}   passing variables here will override defaults
+        
