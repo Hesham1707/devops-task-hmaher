@@ -14,7 +14,7 @@ mkdir -p ~/.aws
 ls ~/.aws/config 2>/dev/null ||  touch ~/.aws/config
 grep -qxF '[default]' ~/.aws/config || printf "[default]\nregion = eu-west-2\noutput = json\n" >> ~/.aws/config
 ls ~/.aws/credentials 2>/dev/null ||  touch ~/.aws/credentials
-grep -qxF '[default]' ~/.aws/credentials || printf "[default]\naws_access_key_id = AKIA2SDEAZPKHJ4EJZHU\naws_secret_access_key = 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\n" >> ~/.aws/credentials
+grep -qxF '[default]' ~/.aws/credentials || printf "[default]\naws_aws_access_key_id = AKIA2SDEAZPKHJ4EJZHU\naws_secret_aws_access_key = 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\n" >> ~/.aws/credentials
 #End of initilization
 
 #Create scripts
