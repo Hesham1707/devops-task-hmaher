@@ -22,3 +22,8 @@ variable "path_to_script" {
   type    = string
   default = "../../install_logger.sh"
 }
+
+variable "path_to_inv_template" {
+  type    = string
+  default = "inventory.tmpl"
+}

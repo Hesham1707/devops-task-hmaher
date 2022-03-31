@@ -9,14 +9,14 @@ resource "aws_instance" "instance1" {
     ]
 }
 
-resource "aws_s3_bucket" "s3_logs_bucket" {
-  bucket = "test-hyasser-s3-terraform"
-
+data "tls_public_key" "alpha_key" {
+  private_key_pem = "${file("~/.ssh/alpha.pem")}"
 }
 
-resource "aws_s3_bucket_public_access_block" "s3_logs_bucket_pab" {
-  bucket = aws_s3_bucket.s3_logs_bucket.id
-
-  block_public_acls   = true
-  block_public_policy = true
+resource "local_file" "ansible_inventory" {
+  content = templatefile("${var.path_to_inv_template}", {
+      ip          = aws_instance.instance1.public_ip,
+      ssh_keyfile = data.tls_public_key.alpha_key.private_key_pem
+  })
+  filename = format("%s/%s", abspath(path.root), "inventory.yaml")
 }
