@@ -5,20 +5,20 @@ variable "region" {
 variable "instance_type" {
   default = "t2.micro"
 }
-variable "ami"{
-  default ="ami-0015a39e4b7c0966f"
+variable "ami" {
+  default = "ami-0015a39e4b7c0966f"
 }
 
 variable "aws_access_key" {
-  type        = string
+  type      = string
   sensitive = true
 }
 variable "aws_secret_key" {
-  type        = string
+  type      = string
   sensitive = true
 }
 
 variable "path_to_script" {
-  type        = string
+  type    = string
   default = "../../install_logger.sh"
 }

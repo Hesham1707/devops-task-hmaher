@@ -14,7 +14,7 @@ mkdir -p ~/.aws
 ls ~/.aws/config 2>/dev/null ||  touch ~/.aws/config
 grep -qxF '[default]' ~/.aws/config || printf "[default]\nregion = eu-west-2\noutput = json\n" >> ~/.aws/config
 ls ~/.aws/credentials 2>/dev/null ||  touch ~/.aws/credentials
-grep -qxF '[default]' ~/.aws/credentials || printf "[default]\naws_aws_access_key_id = AKIA2SDEAZPKHJ4EJZHU\naws_secret_aws_access_key = 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\n" >> ~/.aws/credentials
+grep -qxF '[default]' ~/.aws/credentials || printf "[default]\naws_access_key_id = AKIA2SDEAZPKHJ4EJZHU\naws_secret_access_key = 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\n" >> ~/.aws/credentials
 #End of initilization
 
 #Create scripts
@@ -78,7 +78,7 @@ cat > ~/send_to_bucket.sh <<'EOF1'
     file_name=util_$date_today.log
 
     #send file to bucket under instanceId/todayDate
-    /usr/local/bin/aws s3 cp ~/logs/$file_name s3://test-hyasser-s3/$instance_id/$date_today/$file_name >> ~/awslogs.txt 2>&1
+    /usr/local/bin/aws s3 cp ~/logs/$file_name s3://test-hyasser-s3-terraform/$instance_id/$date_today/$file_name >> ~/awslogs.txt 2>&1
 EOF1
 chmod +x ~/send_to_bucket.sh 
 
