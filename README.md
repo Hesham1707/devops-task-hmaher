@@ -31,6 +31,14 @@ your script.
 5- Head onto IAM to create an access key to be able to upload to the S3 bucket
 6- The key ID and secret key and hardcoded into the script
 
+Or you can simply switch to the terrafrom branch and run
+```
+terraform init
+terraform apply -var-file="secret.tfvars"
+```
+This will auto provision and auto install the logger script   
+*secret.tfvars* is not available on the repo for security reasons
+
 ## Script Setup
 You can setup the script using 2 methods  
 1- On EC2 initialization pass the script as user data  
