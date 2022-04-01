@@ -68,7 +68,7 @@ This will auto provision and auto install the logger script
 *secret.tfvars* is not available on the repo for security reasons  
 
 ## Ansible branch
-Playbook exists that runs on existing on newly created environments through terrafrom (new ec2's ip is automatically added to ansible inventory)  
+Playbook exists that runs on existing or newly created environments through terrafrom (new ec2's ip is automatically added to ansible inventory)  
 You can also run the playbook on any existing environment by adjusting the inventory file  
 Adjust the inventory file if needed and run 
 ```
