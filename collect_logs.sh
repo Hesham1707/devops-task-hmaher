@@ -13,7 +13,7 @@ touch ~/Tools/logs/$file_name
 
 #Collect cpu utilization
 cpu_usage () {
-idle=`top -b -n 1 | grep Cpu | awk '{print $8}'`
+idle=`top -b -n 1 | grep Cpu | awk -F "," '{printf "%0.2f", $4}'`
 usage=`echo 100 $idle | awk '{printf $1-$2}'`
 #write to file
 echo "$(date +%c) --- Cpu usage $usage%" >>  ~/Tools/logs/$file_name
