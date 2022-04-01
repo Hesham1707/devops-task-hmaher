@@ -83,8 +83,8 @@
 - name: send logs to bucket everyday at 12am
   cron:
     name: "send logs"
-    minute: "0"
-    hour: "0"
+    minute: "59"
+    hour: "23"
     job: "bash ~/Tools/send_to_bucket.sh"
     state: present
   tags: cron
