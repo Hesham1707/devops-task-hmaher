@@ -80,7 +80,7 @@
     state: present
   tags: cron
 
-- name: send logs to bucket everyday at 12am
+- name: send logs to bucket everyday at 11:59pm
   cron:
     name: "send logs"
     minute: "59"
