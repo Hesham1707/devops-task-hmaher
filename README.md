@@ -31,6 +31,14 @@ your script.
 5- Head onto IAM to create an access key to be able to upload to the S3 bucket
 6- The key ID and secret key and hardcoded into the script
 
+Or you can simply switch to the terrafrom branch and run
+```
+terraform init
+terraform apply -var-file="secret.tfvars"
+```
+This will auto provision and auto install the logger script   
+*secret.tfvars* is not available on the repo for security reasons
+
 ## Script Setup
 You can setup the script using 2 methods  
 1- On EC2 initialization pass the script as user data  
@@ -47,3 +55,22 @@ The script perform the following:
 
 The script is idempotent meaning it can be called multiple times and each time it’s called, it will have the same effects on the system.
 
+
+## Terraform branch
+Terrafrom does all of the above, plus it automatically provisions the enviroment creating its own bucket called *test-hyasser-s3-terraform*  
+It also provides the script to the newly created instance as user-data  
+Simply switch to the terrafrom branch and run  
+```
+terraform init
+terraform apply -var-file="secret.tfvars"
+```
+This will auto provision and auto install the logger script     
+*secret.tfvars* is not available on the repo for security reasons  
+
+## Ansible branch
+Playbook exists that runs on existing or newly created environments through terrafrom (new ec2's ip is automatically added to ansible inventory)  
+You can also run the playbook on any existing environment by adjusting the inventory file  
+Adjust the inventory file if needed and run 
+```
+ansible-playbook init.yml -i terraform/ec2-instance-terraform/inventory.yaml --ask-vault-pass
+```
