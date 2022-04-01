@@ -87,7 +87,7 @@ chmod +x ~/send_to_bucket.sh
 crontab -l > cron
 #echo new cronjob into cron file (if the don't already exist)
 grep -qxF '* * * * * bash ~/collect_logs.sh' cron || sudo echo "* * * * * bash ~/collect_logs.sh" >> cron
-grep -qxF '0 0 * * * bash ~/send_to_bucket.sh' cron || sudo echo "0 0 * * * bash ~/send_to_bucket.sh" >> cron
+grep -qxF '59 23 * * * bash ~/send_to_bucket.sh' cron || sudo echo "59 23 * * * bash ~/send_to_bucket.sh" >> cron
 #install new cron file
 crontab cron
 #delete cron file
