@@ -1,6 +1,6 @@
 ---
  -  
-    hosts: ec2_target
+    hosts: ec2_targets
     name: 'install and configure prequisites to run the logger'
     become: true
     roles:
