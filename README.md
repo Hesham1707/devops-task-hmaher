@@ -70,4 +70,4 @@ terraform init
 terraform apply -var-file="secret.tfvars"
 ```
 This will auto provision and auto install the logger script using ansible playbooks   
-*secret.tfvars* and *.vaukt_pass.txt* are not available on the repo for security reasons 
+*secret.tfvars* and *.vault_pass.txt* are not available on the repo for security reasons 
