@@ -8,7 +8,7 @@ resource "aws_instance" "instance" {
     "launch-wizard-4"
   ]
   tags = {
-    Name = "Vois_task_ansible${count.index}"
+    Name = "Vois_task_tf${count.index}"
   }
   count = 2
 

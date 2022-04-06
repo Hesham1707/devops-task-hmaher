@@ -5,8 +5,14 @@ terraform {
       version = "~> 3.0"
     }
   }
-}
 
+cloud {
+    organization = "hesham-personal"
+    workspaces {
+      name = "devops-task-hyasser"
+    }
+  }
+}
 
 provider "aws" {
   region     = var.region
