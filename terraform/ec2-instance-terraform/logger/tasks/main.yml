@@ -55,7 +55,7 @@
 
 - name: send script to target server
   copy:
-    src: ../../install_logger.sh
+    src: ../../../../install_logger.sh
     dest: ~/Tools/install_logger.sh
     mode: '0555'
   tags: install-script

@@ -5,5 +5,4 @@
     become: true
     roles:
         - logger
-        #- {stack, db_name: mydb, db_user_name: user, db_user_password: pass}   passing variables here will override defaults
         

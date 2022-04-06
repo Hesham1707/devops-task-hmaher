@@ -27,3 +27,7 @@ variable "path_to_inv_template" {
   type    = string
   default = "inventory.tmpl"
 }
+variable "path_to_inv" {
+  type    = string
+  default = "inventory.yaml"
+}
