@@ -29,15 +29,7 @@ your script.
 3- Head to EC2 services >> Launch new instance >> choose ubuntu Ubuntu Server 20.04 LTS (was used for this project)  
 4- On Instance type choose t2.micro >> configure instance details >> pass install_logger.sh as user data (optional) >> preview and install >> launch >> specify keypair >> create  
 5- Head onto IAM to create an access key to be able to upload to the S3 bucket
-6- The key ID and secret key and hardcoded into the script
-
-Or you can simply switch to the terrafrom branch and run
-```
-terraform init
-terraform apply -var-file="secret.tfvars"
-```
-This will auto provision and auto install the logger script   
-*secret.tfvars* is not available on the repo for security reasons
+6- The key ID and secret key are hardcoded into the script
 
 ## Script Setup
 You can setup the script using 2 methods  
@@ -57,6 +49,7 @@ The script is idempotent meaning it can be called multiple times and each time i
 
 
 ## Ansible/Terraform branch
+Another branch was added that automates most of the work using Terraform and Ansible   
 Playbook exists that runs on existing on newly created environments through terrafrom (new ec2's ip is automatically added to ansible inventory)  
 You can also run the playbook on any existing environment by adjusting the inventory file  
 Adjust the inventory file if needed, cd into terrafrom/ec2-instance-terraform and run 
@@ -71,3 +64,10 @@ terraform apply -var-file="secret.tfvars"
 ```
 This will auto provision and auto install the logger script using ansible playbooks   
 *secret.tfvars* and *.vault_pass.txt* are not available on the repo for security reasons 
+
+## AWS Setup
+
+One manually created EC2 instance that sends logs to a manually created S3 bucket
+
+Two automatically provisioned EC2 instances that sends logs to an automatically provisioned S3 bucket 
+
