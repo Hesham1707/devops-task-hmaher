@@ -38,7 +38,7 @@ You can setup the script using 2 methods
 
 ## About The Script
 The install_logger.sh script is mostly plug and play.
-The script perform the following:
+The script performs the following:  
 1- Download prerequisites and configures the AWS CLI  
 2- Generates 2 scripts *collect_logs.sh* and *send_to_bucket.sh*  
 3- Modifies their permissions to allow execution  
@@ -50,14 +50,14 @@ The script is idempotent meaning it can be called multiple times and each time i
 
 ## Ansible/Terraform branch
 Another branch was added that automates most of the work using Terraform and Ansible   
-Playbook exists that runs on existing on newly created environments through terrafrom (new ec2's ip is automatically added to ansible inventory)  
+Playbook exists that runs on existing on newly created environments through terraform (new ec2's ip is automatically added to ansible inventory)  
 You can also run the playbook on any existing environment by adjusting the inventory file  
-Adjust the inventory file if needed, cd into terrafrom/ec2-instance-terraform and run 
+Adjust the inventory file if needed, cd into terraform/ec2-instance-terraform and run 
 ```
 ansible-playbook init.yml -i inventory.yaml --ask-vault-pass
 ```
-Terrafrom automates provisioning the enviroment creating 2 ec2 instances (Vois_task_ansible1 and Vois_task_ansible2) it and an s3 bucket called *test-hyasser-s3-terraform*  
-Simply cd to the terrafrom/ec2-instance-terraform and run  
+Terraform automates provisioning the environment creating 2 ec2 instances (Vois_task_ansible1 and Vois_task_ansible2) it and an s3 bucket called *test-hyasser-s3-terraform*  
+Simply cd to the terraform/ec2-instance-terraform and run  
 ```
 terraform init
 terraform apply -var-file="secret.tfvars"
@@ -70,4 +70,5 @@ This will auto provision and auto install the logger script using ansible playbo
 One manually created EC2 instance that sends logs to a manually created S3 bucket
 
 Two automatically provisioned EC2 instances that sends logs to an automatically provisioned S3 bucket 
+
 
